@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dandar Health — Case Study | Yuvaraj M</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface2: #181818;
+    --border: #222222;
+    --accent: #e8ff47;
+    --accent2: #ff4747;
+    --text: #f0ede8;
+    --muted: #666666;
+    --muted2: #444444;
+    --max-width: 1600px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 40px; height: 40px;
+    border: 1px solid rgba(232,255,71,0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9997;
+    opacity: 0.5;
+  }
+
+  /* MAX WIDTH CONTAINER */
+  .content-wrapper {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-back {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--text); }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 160px 48px 80px;
+    text-align: center;
+  }
+
+  .hero-category {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 10vw, 120px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 32px;
+  }
+
+  .hero-desc {
+    font-size: 20px;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 0 auto 48px;
+    line-height: 1.6;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    text-align: left;
+  }
+
+  .meta-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .meta-value {
+    font-size: 16px;
+    color: var(--text);
+  }
+
+  /* HERO IMAGE */
+  .hero-image {
+    margin: 80px 0;
+  }
+
+  .hero-image img {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 80px 48px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 54px);
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 32px;
+  }
+
+  .section-content {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 800px;
+  }
+
+  .section-content p + p {
+    margin-top: 24px;
+  }
+
+  /* BENTO GRID */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .bento-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+
+  .bento-item:hover {
+    border-color: var(--accent);
+  }
+
+  .bento-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .bento-item:hover img {
+    transform: scale(1.02);
+  }
+
+  .bento-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: var(--muted2);
+    padding: 32px;
+    text-align: center;
+  }
+
+  .bento-placeholder svg {
+    opacity: 0.3;
+  }
+
+  .bento-placeholder-text {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .bento-placeholder-dims {
+    font-size: 11px;
+    color: var(--muted2);
+    font-family: 'Courier New', monospace;
+  }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .lightbox.active {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .lightbox-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    position: relative;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .lightbox-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border: 1px solid var(--border);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 20px;
+  }
+
+  .lightbox-close:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+  }
+
+  /* DESIGN SYSTEM */
+  .design-system {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+
+  .ds-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+
+  .ds-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 48px 40px;
+  }
+
+  .ds-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* TYPOGRAPHY */
+  .type-sample {
+    margin-bottom: 32px;
+  }
+
+  .type-sample:last-child {
+    margin-bottom: 0;
+  }
+
+  .type-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .type-display {
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .type-specs {
+    display: flex;
+    gap: 24px;
+    font-size: 12px;
+    color: var(--muted2);
+    font-family: 'Courier New', monospace;
+  }
+
+  /* COLORS */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .color-swatch {
+    aspect-ratio: 1;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .color-info {
+    margin-top: 12px;
+  }
+
+  .color-name {
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .color-hex {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Courier New', monospace;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-right {
+    font-size: 12px;
+    color: var(--muted2);
+    letter-spacing: 0.05em;
+  }
+
+  /* REVEAL ANIMATION */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .nav-inner { padding: 20px 24px; }
+    .hero { padding: 120px 24px 60px; }
+    section { padding: 60px 24px; }
+    .hero-meta { gap: 32px; }
+    .bento-grid { grid-template-columns: 1fr; }
+    .bento-item { grid-column: span 1 !important; grid-row: span 1 !important; }
+    .ds-grid { grid-template-columns: 1fr; }
+    .color-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-inner { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="yuvaraj-portfolio.html" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 13L5 8l5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Back to Portfolio
+    </a>
+    <a href="yuvaraj-portfolio.html" class="nav-logo">YM</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="content-wrapper">
+  <section class="hero">
+    <p class="hero-category">Case Study · 2025</p>
+    <h1 class="hero-title">Dandar Health</h1>
+    <p class="hero-desc">
+      Redesigning a digital healthcare platform to improve access to medical services in rural India — integrating doctor consultations, diagnostics, and pharmacy into one seamless patient experience.
+    </p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <p class="meta-label">Role</p>
+        <p class="meta-value">Product Designer</p>
+      </div>
+      <div class="meta-item">
+        <p class="meta-label">Platform</p>
+        <p class="meta-value">Android App</p>
+      </div>
+      <div class="meta-item">
+        <p class="meta-label">Duration</p>
+        <p class="meta-value">4 months</p>
+      </div>
+      <div class="meta-item">
+        <p class="meta-label">Year</p>
+        <p class="meta-value">2025</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="hero-image">
+    <img src="dandar-thumbnail.png" alt="Dandar Health App Overview">
+  </div>
+
+  <!-- OVERVIEW -->
+  <section>
+    <p class="section-label reveal">Overview</p>
+    <h2 class="section-title reveal">Bridging the rural–urban healthcare gap</h2>
+    <div class="section-content reveal">
+      <p>Dandar Health is a digital healthcare platform focused on expanding access to quality medical services in underserved and rural regions of India, particularly across districts in Jharkhand. The platform combines telemedicine, physical clinics, pharmacy services, and diagnostics into a single integrated healthcare ecosystem.</p>
+      <p>The patient app redesign aimed to simplify the fragmented healthcare journey — where patients traditionally visit multiple locations for consultations, tests, and medicines — into a unified digital experience that brings specialist care, diagnostics, and medications directly to their fingertips.</p>
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS -->
+  <section>
+    <p class="section-label reveal">Screens & Features</p>
+    <h2 class="section-title reveal">Visual walkthrough</h2>
+    
+    <div class="bento-grid reveal">
+      <!-- Top Wide - Buy Medicines -->
+      <div class="bento-item" style="grid-column: span 12; min-height: 400px;">
+        <img src="dandar-top.png" alt="Buy Medicines Screen">
+      </div>
+
+      <!-- Left Tall - Doctor's Profile -->
+      <div class="bento-item" style="grid-column: span 6; grid-row: span 2; min-height: 640px;">
+        <img src="dandar-left.png" alt="Doctor's Profile">
+      </div>
+
+      <!-- Right Top - Location -->
+      <div class="bento-item" style="grid-column: span 6; min-height: 320px;">
+        <img src="dandar-right-top.png" alt="Location & Address">
+      </div>
+
+      <!-- Right Bottom - Home Dashboard -->
+      <div class="bento-item" style="grid-column: span 6; min-height: 320px;">
+        <img src="dandar-right-bottom.png" alt="Home Dashboard">
+      </div>
+
+      <!-- Bottom Wide - Book & Manage Lab Tests -->
+      <div class="bento-item" style="grid-column: span 12; min-height: 640px;">
+        <img src="dandar-bottom.png" alt="Book & Manage Lab Tests">
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- DESIGN SYSTEM -->
+<section class="design-system">
+  <div class="content-wrapper">
+    <p class="section-label reveal">Design System</p>
+    <h2 class="section-title reveal">Visual language & style guide</h2>
+
+    <div class="ds-grid reveal">
+      
+      <!-- TYPOGRAPHY -->
+      <div class="ds-card">
+        <h3 class="ds-card-title">Typography</h3>
+        
+        <div class="type-sample">
+          <p class="type-label">Headings</p>
+          <p class="type-display" style="font-family: 'Manrope', sans-serif; font-weight: 700;">Manrope Bold</p>
+          <div class="type-specs">
+            <span>Weight: 700</span>
+            <span>Sizes: 20-32px</span>
+          </div>
+        </div>
+
+        <div class="type-sample">
+          <p class="type-label">Body Text</p>
+          <p class="type-display" style="font-family: 'Manrope', sans-serif; font-weight: 400; font-size: 32px;">Manrope Regular</p>
+          <div class="type-specs">
+            <span>Weight: 400</span>
+            <span>Sizes: 14-16px</span>
+          </div>
+        </div>
+
+        <div class="type-sample">
+          <p class="type-label">Medium / Labels</p>
+          <p class="type-display" style="font-family: 'Manrope', sans-serif; font-weight: 500; font-size: 28px;">Manrope Medium</p>
+          <div class="type-specs">
+            <span>Weight: 500</span>
+            <span>Sizes: 12-14px</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLORS -->
+      <div class="ds-card">
+        <h3 class="ds-card-title">Color Palette</h3>
+        
+        <div class="color-grid">
+          <div>
+            <div class="color-swatch" style="background: #00A86B;"></div>
+            <div class="color-info">
+              <p class="color-name">Primary Green</p>
+              <p class="color-hex">#00A86B</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="color-swatch" style="background: #8B3A8B;"></div>
+            <div class="color-info">
+              <p class="color-name">Secondary Purple</p>
+              <p class="color-hex">#8B3A8B</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="color-swatch" style="background: #F5F5F5;"></div>
+            <div class="color-info">
+              <p class="color-name">Background Light</p>
+              <p class="color-hex">#F5F5F5</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="color-swatch" style="background: #1A1A1A;"></div>
+            <div class="color-info">
+              <p class="color-name">Text Dark</p>
+              <p class="color-hex">#1A1A1A</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="color-swatch" style="background: #757575;"></div>
+            <div class="color-info">
+              <p class="color-name">Text Muted</p>
+              <p class="color-hex">#757575</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="color-swatch" style="background: #FFFFFF; border: 2px solid #E0E0E0;"></div>
+            <div class="color-info">
+              <p class="color-name">White</p>
+              <p class="color-hex">#FFFFFF</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOME -->
+<div class="content-wrapper">
+  <section>
+    <p class="section-label reveal">Outcome</p>
+    <h2 class="section-title reveal">Impact & learnings</h2>
+    <div class="section-content reveal">
+      <p>The redesigned Dandar Health patient app successfully streamlined the healthcare journey for rural users by consolidating fragmented services into a single, intuitive platform. By integrating consultations, diagnostics, and pharmacy services digitally, the app reduced the need for patients to travel long distances to access specialist care.</p>
+      <p>Key learnings included understanding the unique constraints of rural healthcare delivery — such as limited internet connectivity and varying digital literacy — and designing with progressive disclosure and clear visual hierarchy to ensure accessibility for all users.</p>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-left">© 2025 Yuvaraj M. All rights reserved.</p>
+    <p class="footer-right">Bangalore, IN · Product Designer</p>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose">×</button>
+    <img src="" alt="Full size" id="lightboxImg">
+  </div>
+</div>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Hover effects
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px';
+      cursor.style.height = '20px';
+      ring.style.width = '60px';
+      ring.style.height = '60px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px';
+      cursor.style.height = '12px';
+      ring.style.width = '40px';
+      ring.style.height = '40px';
+    });
+  });
+
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // LIGHTBOX
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  // Add click handlers to all bento items with images
+  document.querySelectorAll('.bento-item img').forEach(img => {
+    img.parentElement.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // Close lightbox
+  const closeLightbox = () => {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // ESC key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
+</script>
+</body>
+</html>
