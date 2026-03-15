@@ -236,21 +236,92 @@
     border: 1px solid var(--border);
     overflow: hidden;
     position: relative;
-    min-height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.3s;
   }
 
-  .bento-item.large { grid-column: span 8; min-height: 480px; }
-  .bento-item.medium { grid-column: span 6; min-height: 380px; }
-  .bento-item.small { grid-column: span 4; min-height: 280px; }
-  .bento-item.wide { grid-column: span 12; min-height: 400px; }
+  .bento-item:hover {
+    border-color: var(--accent);
+  }
 
   .bento-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .bento-item:hover img {
+    transform: scale(1.02);
+  }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .lightbox.active {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .lightbox-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    position: relative;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .lightbox-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border: 1px solid var(--border);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 20px;
+  }
+
+  .lightbox-close:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
   }
 
   .bento-placeholder {
@@ -532,95 +603,37 @@
     <h2 class="section-title reveal">Visual walkthrough</h2>
     
     <div class="bento-grid reveal">
-      <!-- Large featured -->
-      <div class="bento-item large">
-        <div class="bento-placeholder">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <rect x="4" y="8" width="40" height="32" rx="2" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="16" cy="20" r="4" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M24 32c0-4.4-3.6-8-8-8s-8 3.6-8 8" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M28 18h8M28 22h8M28 26h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <p class="bento-placeholder-text">Profile Screen</p>
-          <p class="bento-placeholder-dims">Upload screenshot here</p>
-        </div>
+      <!-- Row 1: Top Wide - Profile -->
+      <div class="bento-item" style="grid-column: span 12; min-height: 400px;">
+        <img src="hm-profile.png" alt="Profile Screen">
       </div>
 
-      <!-- Medium -->
-      <div class="bento-item small">
-        <div class="bento-placeholder">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="3" y="6" width="34" height="28" rx="2" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M3 12h34" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="20" cy="22" r="4" stroke="currentColor" stroke-width="1.5"/>
-          </svg>
-          <p class="bento-placeholder-text">Discover</p>
-          <p class="bento-placeholder-dims">Upload screenshot</p>
-        </div>
+      <!-- Row 2: Widget and Chat (equal) -->
+      <div class="bento-item" style="grid-column: span 6; min-height: 280px;">
+        <img src="hm-widget.png" alt="Widget Screen">
       </div>
 
-      <!-- Small items -->
-      <div class="bento-item small">
-        <div class="bento-placeholder">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M20 12v8l5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <p class="bento-placeholder-text">Events</p>
-          <p class="bento-placeholder-dims">Upload screenshot</p>
-        </div>
+      <div class="bento-item" style="grid-column: span 6; min-height: 280px;">
+        <img src="hm-chat.png" alt="Chat Screen">
       </div>
 
-      <div class="bento-item small">
-        <div class="bento-placeholder">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="6" y="8" width="28" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M6 14h28M11 10v-2M29 10v-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="14" cy="22" r="1.5" fill="currentColor"/>
-            <circle cx="20" cy="22" r="1.5" fill="currentColor"/>
-            <circle cx="26" cy="22" r="1.5" fill="currentColor"/>
-          </svg>
-          <p class="bento-placeholder-text">Messages</p>
-          <p class="bento-placeholder-dims">Upload screenshot</p>
-        </div>
+      <!-- Row 3: Tall Swipe (left) + Premium (top right) -->
+      <div class="bento-item" style="grid-column: span 6; grid-row: span 2; min-height: 640px;">
+        <img src="hm-swipe.png" alt="Swipe to Connect">
       </div>
 
-      <!-- Wide -->
-      <div class="bento-item wide">
-        <div class="bento-placeholder">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <rect x="4" y="12" width="40" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="16" cy="24" r="6" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="32" cy="24" r="6" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M22 24h4" stroke="currentColor" stroke-width="1.5"/>
-          </svg>
-          <p class="bento-placeholder-text">Connection Flow</p>
-          <p class="bento-placeholder-dims">Upload wide screenshot here (recommended: 1600×400px)</p>
-        </div>
+      <div class="bento-item" style="grid-column: span 6; min-height: 320px;">
+        <img src="hm-premium.png" alt="Premium Plans">
       </div>
 
-      <!-- More items -->
-      <div class="bento-item medium">
-        <div class="bento-placeholder">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <path d="M8 30l5-5 6 6 13-13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="28" cy="28" r="3" stroke="currentColor" stroke-width="1.5"/>
-          </svg>
-          <p class="bento-placeholder-text">Analytics</p>
-          <p class="bento-placeholder-dims">Upload screenshot</p>
-        </div>
+      <!-- Row 4: VBC (bottom right, continues from swipe row) -->
+      <div class="bento-item" style="grid-column: span 6; min-height: 320px;">
+        <img src="hm-vbc.png" alt="VBC Feature">
       </div>
 
-      <div class="bento-item medium">
-        <div class="bento-placeholder">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="8" y="6" width="24" height="28" rx="2" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M14 14h12M14 20h12M14 26h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <p class="bento-placeholder-text">Settings</p>
-          <p class="bento-placeholder-dims">Upload screenshot</p>
-        </div>
+      <!-- Row 5: Bottom Wide - Hubble Circle -->
+      <div class="bento-item" style="grid-column: span 12; min-height: 640px;">
+        <img src="hm-hubble-circle.png" alt="Hubble Circle">
       </div>
     </div>
   </section>
@@ -639,32 +652,38 @@
         <h3 class="ds-card-title">Typography</h3>
         
         <div class="type-sample">
-          <p class="type-label">Display / Headings</p>
-          <p class="type-display" style="font-family: 'Poppins', sans-serif; font-weight: 600;">Poppins SemiBold</p>
+          <p class="type-label">Headings</p>
+          <p class="type-display" style="font-family: 'Montserrat', sans-serif; font-weight: 600;">Montserrat SemiBold</p>
           <div class="type-specs">
-            <span>Font: Poppins</span>
             <span>Weight: 600</span>
-            <span>Sizes: 24-48px</span>
+            <span>Sizes: 18-24px</span>
           </div>
         </div>
 
         <div class="type-sample">
           <p class="type-label">Body Text</p>
-          <p class="type-display" style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: 32px;">Inter Regular</p>
+          <p class="type-display" style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 32px;">Montserrat Regular</p>
           <div class="type-specs">
-            <span>Font: Inter</span>
             <span>Weight: 400</span>
-            <span>Sizes: 14-18px</span>
+            <span>Sizes: 14-16px</span>
           </div>
         </div>
 
         <div class="type-sample">
-          <p class="type-label">Labels & Captions</p>
-          <p class="type-display" style="font-family: 'Inter', sans-serif; font-weight: 500; font-size: 28px;">Inter Medium</p>
+          <p class="type-label">Medium / Labels</p>
+          <p class="type-display" style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 28px;">Montserrat Medium</p>
           <div class="type-specs">
-            <span>Font: Inter</span>
             <span>Weight: 500</span>
-            <span>Sizes: 11-13px</span>
+            <span>Sizes: 11-14px</span>
+          </div>
+        </div>
+
+        <div class="type-sample">
+          <p class="type-label">Italic Medium</p>
+          <p class="type-display" style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-style: italic; font-size: 28px;">Montserrat Medium Italic</p>
+          <div class="type-specs">
+            <span>Weight: 500 Italic</span>
+            <span>Sizes: 11-14px</span>
           </div>
         </div>
       </div>
@@ -677,122 +696,49 @@
           <div>
             <div class="color-swatch" style="background: #B8E986;"></div>
             <div class="color-info">
-              <p class="color-name">Primary Accent</p>
+              <p class="color-name">Primary</p>
               <p class="color-hex">#B8E986</p>
-            </div>
-          </div>
-
-          <div>
-            <div class="color-swatch" style="background: #2D2D2D;"></div>
-            <div class="color-info">
-              <p class="color-name">Background Dark</p>
-              <p class="color-hex">#2D2D2D</p>
-            </div>
-          </div>
-
-          <div>
-            <div class="color-swatch" style="background: #F5F5F5;"></div>
-            <div class="color-info">
-              <p class="color-name">Background Light</p>
-              <p class="color-hex">#F5F5F5</p>
             </div>
           </div>
 
           <div>
             <div class="color-swatch" style="background: #1A1A1A;"></div>
             <div class="color-info">
-              <p class="color-name">Text Primary</p>
+              <p class="color-name">Background</p>
               <p class="color-hex">#1A1A1A</p>
             </div>
           </div>
 
           <div>
-            <div class="color-swatch" style="background: #757575;"></div>
+            <div class="color-swatch" style="background: #2D2D2D;"></div>
             <div class="color-info">
-              <p class="color-name">Text Secondary</p>
-              <p class="color-hex">#757575</p>
+              <p class="color-name">Surface</p>
+              <p class="color-hex">#2D2D2D</p>
             </div>
           </div>
 
           <div>
             <div class="color-swatch" style="background: #FFFFFF; border: 2px solid #E0E0E0;"></div>
             <div class="color-info">
-              <p class="color-name">White</p>
+              <p class="color-name">Text Light</p>
               <p class="color-hex">#FFFFFF</p>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- SPACING -->
-      <div class="ds-card">
-        <h3 class="ds-card-title">Spacing System</h3>
-        
-        <div class="spacing-row">
-          <span class="spacing-label">xs</span>
-          <div class="spacing-visual" style="width: 32px;"></div>
-          <span class="spacing-value">4px</span>
-        </div>
-
-        <div class="spacing-row">
-          <span class="spacing-label">sm</span>
-          <div class="spacing-visual" style="width: 64px;"></div>
-          <span class="spacing-value">8px</span>
-        </div>
-
-        <div class="spacing-row">
-          <span class="spacing-label">md</span>
-          <div class="spacing-visual" style="width: 96px;"></div>
-          <span class="spacing-value">12px</span>
-        </div>
-
-        <div class="spacing-row">
-          <span class="spacing-label">lg</span>
-          <div class="spacing-visual" style="width: 128px;"></div>
-          <span class="spacing-value">16px</span>
-        </div>
-
-        <div class="spacing-row">
-          <span class="spacing-label">xl</span>
-          <div class="spacing-visual" style="width: 192px;"></div>
-          <span class="spacing-value">24px</span>
-        </div>
-
-        <div class="spacing-row">
-          <span class="spacing-label">2xl</span>
-          <div class="spacing-visual" style="width: 256px;"></div>
-          <span class="spacing-value">32px</span>
-        </div>
-      </div>
-
-      <!-- COMPONENTS -->
-      <div class="ds-card">
-        <h3 class="ds-card-title">Component Specs</h3>
-        
-        <div class="type-sample">
-          <p class="type-label">Border Radius</p>
-          <div class="type-specs">
-            <span>Cards: 16px</span>
-            <span>Buttons: 12px</span>
-            <span>Inputs: 8px</span>
+          <div>
+            <div class="color-swatch" style="background: #A0A0A0;"></div>
+            <div class="color-info">
+              <p class="color-name">Text Muted</p>
+              <p class="color-hex">#A0A0A0</p>
+            </div>
           </div>
-        </div>
 
-        <div class="type-sample">
-          <p class="type-label">Shadows</p>
-          <div class="type-specs" style="flex-direction: column; align-items: flex-start;">
-            <span>Small: 0 2px 8px rgba(0,0,0,0.08)</span>
-            <span style="margin-top: 4px;">Medium: 0 4px 16px rgba(0,0,0,0.12)</span>
-            <span style="margin-top: 4px;">Large: 0 8px 24px rgba(0,0,0,0.16)</span>
-          </div>
-        </div>
-
-        <div class="type-sample">
-          <p class="type-label">Button Heights</p>
-          <div class="type-specs">
-            <span>Small: 36px</span>
-            <span>Medium: 44px</span>
-            <span>Large: 52px</span>
+          <div>
+            <div class="color-swatch" style="background: #FFD700;"></div>
+            <div class="color-info">
+              <p class="color-name">Accent Gold</p>
+              <p class="color-hex">#FFD700</p>
+            </div>
           </div>
         </div>
       </div>
@@ -820,6 +766,14 @@
     <p class="footer-right">Bangalore, IN · Product Designer</p>
   </div>
 </footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose">×</button>
+    <img src="" alt="Full size" id="lightboxImg">
+  </div>
+</div>
 
 <script>
   // CURSOR
@@ -872,6 +826,38 @@
   }, { threshold: 0.12 });
 
   reveals.forEach(el => observer.observe(el));
+
+  // LIGHTBOX
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  // Add click handlers to all bento items
+  document.querySelectorAll('.bento-item img').forEach(img => {
+    img.parentElement.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // Close lightbox
+  const closeLightbox = () => {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // ESC key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
 </script>
 </body>
 </html>
