@@ -217,24 +217,6 @@
     height: 480px;
     margin-top: 120px;
   }
-  .hero-photo-placeholder {
-    width: 100%;
-    height: 100%;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    color: var(--muted);
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .hero-photo-placeholder svg {
-    opacity: 0.3;
-  }
   .hero-photo-border {
     position: absolute;
     bottom: -16px;
@@ -415,31 +397,6 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
-  .skills-section {
-    margin-top: 48px;
-  }
-  .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 20px;
-  }
-  .skill-tag {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    padding: 8px 18px;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border-radius: 2px;
-    transition: all 0.2s;
-  }
-  .skill-tag:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(232,255,71,0.05);
-  }
   .projects-section {
     background: var(--surface);
     border-top: 1px solid var(--border);
@@ -502,8 +459,8 @@
     height: 100%;
     object-fit: cover;
   }
-  .thumb-merabills {
-    background: linear-gradient(135deg, #0a1a0a 0%, #0d2d0d 50%, #0f4a0f 100%);
+  .thumb-crypto {
+    background: linear-gradient(135deg, #1a0a1a 0%, #2d0d2d 50%, #4a0f4a 100%);
   }
   .thumb-placeholder-text {
     font-family: 'Bebas Neue', sans-serif;
@@ -871,20 +828,6 @@
             <div class="stat-label">Caffeine Consumed</div>
           </div>
         </div>
-        <div class="skills-section">
-          <p class="section-label" style="margin-bottom: 0">Skills & Tools</p>
-          <div class="skill-tags">
-            <span class="skill-tag">UX/UI Principles</span>
-            <span class="skill-tag">Wireframing</span>
-            <span class="skill-tag">Prototyping</span>
-            <span class="skill-tag">Figma</span>
-            <span class="skill-tag">Graphic Design</span>
-            <span class="skill-tag">Design Systems</span>
-            <span class="skill-tag">User Research</span>
-            <span class="skill-tag">Cross-functional Collab</span>
-            <span class="skill-tag">Print + Digital</span>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -941,15 +884,15 @@
       </a>
       <div class="project-card reveal">
         <div class="project-thumb">
-          <div class="project-thumb-bg thumb-merabills"></div>
-          <span class="thumb-placeholder-text" style="font-size:46px">MERA<br>BILLS</span>
-          <span class="project-thumb-label">UX Redesign</span>
+          <div class="project-thumb-bg thumb-crypto"></div>
+          <span class="thumb-placeholder-text" style="font-size:42px">CRYPTO<br>EXCHANGE</span>
+          <span class="project-thumb-label">Campaign Design</span>
         </div>
         <div class="project-body">
           <div class="project-info">
-            <p class="project-category">Fintech · Mobile App · 2024–25</p>
-            <h3 class="project-name">MeraBills</h3>
-            <p class="project-desc">Redesigning a P&L tracking app for women entrepreneurs running small businesses — making financial clarity accessible without jargon.</p>
+            <p class="project-category">Web3 · Marketing Campaign · 2026</p>
+            <h3 class="project-name">Crypto Exchange Campaign</h3>
+            <p class="project-desc">Designing a multi-channel marketing campaign for a next-generation crypto exchange platform — building trust and accessibility in the decentralized finance space.</p>
           </div>
           <div class="project-arrow">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -1076,7 +1019,7 @@
     requestAnimationFrame(animateRing);
   }
   animateRing();
-  document.querySelectorAll('a, button, .project-card, .stat-card, .skill-tag').forEach(el => {
+  document.querySelectorAll('a, button, .project-card, .stat-card').forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.style.width = '20px';
       cursor.style.height = '20px';
