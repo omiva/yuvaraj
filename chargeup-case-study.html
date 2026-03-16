@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChargeUp — Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --surface2: #181818;
+  --border: #222222;
+  --accent: #e8ff47;
+  --text: #f0ede8;
+  --muted: #666666;
+  --muted2: #444444;
+  --primary: #00C853;
+  --max-width: 1400px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-back:hover {
+  color: var(--accent);
+}
+
+.nav-back svg {
+  transform: rotate(180deg);
+}
+
+.hero {
+  padding: 140px 48px 80px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.hero-category {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(48px, 8vw, 120px);
+  line-height: 0.95;
+  color: var(--text);
+  margin-bottom: 32px;
+}
+
+.hero-intro {
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 800px;
+  margin-bottom: 48px;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.meta-item h4 {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.meta-item p {
+  font-size: 15px;
+  color: var(--text);
+}
+
+.section {
+  padding: 80px 48px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 5vw, 48px);
+  color: var(--text);
+  margin-bottom: 24px;
+  line-height: 1.1;
+}
+
+.section-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 700px;
+  margin-bottom: 24px;
+}
+
+.images-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.image-item {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.image-item:hover {
+  border-color: var(--primary);
+}
+
+.image-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.design-system {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 80px 48px;
+}
+
+.ds-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.ds-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  margin-top: 48px;
+}
+
+.ds-section h3 {
+  font-size: 18px;
+  color: var(--primary);
+  margin-bottom: 24px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.typo-item {
+  margin-bottom: 24px;
+}
+
+.typo-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.typo-sample {
+  color: var(--text);
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.color-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.color-swatch {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.color-info h4 {
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.color-info p {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: monospace;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  border: 1px solid var(--border);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  color: var(--text);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 12px 24px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.lightbox-close:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 48px;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--muted2);
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
+}
+
+.footer-link:hover {
+  border-color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .nav-inner {
+    padding: 16px 24px;
+  }
+  
+  .hero {
+    padding: 100px 24px 60px;
+  }
+  
+  .hero-category {
+    font-size: 10px;
+  }
+  
+  .hero-title {
+    font-size: clamp(40px, 12vw, 60px);
+    margin-bottom: 24px;
+  }
+  
+  .hero-intro {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+  
+  .hero-meta {
+    gap: 32px;
+  }
+  
+  .section {
+    padding: 60px 24px;
+  }
+  
+  .images-grid {
+    gap: 12px;
+  }
+  
+  .design-system {
+    padding: 60px 24px;
+  }
+  
+  .ds-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .color-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  footer {
+    padding: 40px 24px;
+  }
+  
+  .lightbox {
+    padding: 20px;
+  }
+  
+  .lightbox-close {
+    top: 16px;
+    right: 16px;
+    font-size: 12px;
+    padding: 10px 20px;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="./" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Back to Portfolio
+    </a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div style="margin-bottom: 48px;">
+    <img src="chargeup-thumbnail.png" alt="ChargeUp" style="max-width: 200px; height: auto; display: block;">
+  </div>
+  <p class="hero-category">ELECTRIC VEHICLES · EV ECOSYSTEM · 2025</p>
+  <h1 class="hero-title">ChargeUp</h1>
+  <p class="hero-intro">
+    An end-to-end EV ecosystem platform designed to support electric rickshaw drivers through battery financing, asset management, servicing, and operational support. Connecting drivers, dealers, NBFCs, OEMs, and field teams in a unified digital experience.
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <h4>Role</h4>
+      <p>Product Designer</p>
+    </div>
+    <div class="meta-item">
+      <h4>Platform</h4>
+      <p>Mobile & Web</p>
+    </div>
+    <div class="meta-item">
+      <h4>Scope</h4>
+      <p>6 Applications</p>
+    </div>
+    <div class="meta-item">
+      <h4>Year</h4>
+      <p>2025</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <p class="section-label">OVERVIEW</p>
+  <h2 class="section-title">Multi-stakeholder EV ecosystem</h2>
+  <p class="section-text">
+    ChargeUp is a comprehensive platform that manages the complete lifecycle of EV batteries and vehicles while coordinating between financial institutions, field teams, and supply partners. The platform streamlines onboarding, asset tracking, financing workflows, service management, and operational reporting across six interconnected applications.
+  </p>
+  <p class="section-text">
+    <strong>Platform Components:</strong> Driver Mobile App, Employee Mobile App, Dealer/Distributor Web Portal, NBFC Web Portal, OEM Web Portal, and CRM Web Portal — each designed for specific operational roles within the ecosystem.
+  </p>
+</section>
+
+<section class="section">
+  <p class="section-label">KEY FEATURES</p>
+  <h2 class="section-title">Designed for every stakeholder</h2>
+  <p class="section-text">
+    <strong>Driver App:</strong> Battery health monitoring, EMI payment tracking, referral system, service ticket management, and battery analytics including charge trends and usage data.
+  </p>
+  <p class="section-text">
+    <strong>Employee App:</strong> Lead management, KYC verification, EMI collection, asset lifecycle tracking (In Stock → Assigned → Recovery → Immobilized → Recovered), wallet management, and service ticket resolution.
+  </p>
+  <p class="section-text">
+    <strong>Web Portals:</strong> Dealer inventory and service management, NBFC loan approvals and EMI monitoring, OEM product catalog and asset distribution tracking, CRM operational oversight and cross-team coordination.
+  </p>
+</section>
+
+<section class="section">
+  <p class="section-label">VISUAL DESIGN</p>
+  <h2 class="section-title">Interface Showcase</h2>
+  
+  <div class="images-grid">
+    <div class="image-item" onclick="openLightbox('chargeup-01.png')">
+      <img src="chargeup-01.png" alt="Homepage - Driver Dashboard">
+    </div>
+    
+    <div class="image-item" onclick="openLightbox('chargeup-02.png')">
+      <img src="chargeup-02.png" alt="Refer Other Drivers & Virtual Insurance">
+    </div>
+    
+    <div class="image-item" onclick="openLightbox('chargeup-03.png')">
+      <img src="chargeup-03.png" alt="Cross-Platform Designs - NBFC & Admin">
+    </div>
+    
+    <div class="image-item" onclick="openLightbox('chargeup-04.png')">
+      <img src="chargeup-04.png" alt="EMI Payment Tracking">
+    </div>
+    
+    <div class="image-item" onclick="openLightbox('chargeup-05.png')">
+      <img src="chargeup-05.png" alt="CRM, OEM, Dealers Portal">
+    </div>
+  </div>
+</section>
+
+<section class="design-system">
+  <div class="ds-inner">
+    <p class="section-label">DESIGN SYSTEM</p>
+    <h2 class="section-title">Typography & Colors</h2>
+    
+    <div class="ds-grid">
+      <div class="ds-section">
+        <h3>Typography</h3>
+        <div class="typo-item">
+          <div class="typo-label">Primary — SF Pro Text Regular</div>
+          <div class="typo-sample" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif; font-size: 16px;">The quick brown fox jumps over the lazy dog</div>
+        </div>
+        <div class="typo-item">
+          <div class="typo-label">Headings — SF Pro Text Semibold</div>
+          <div class="typo-sample" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif; font-size: 24px; font-weight: 600;">The quick brown fox</div>
+        </div>
+        <div class="typo-item">
+          <div class="typo-label">Body — SF Pro Text Medium</div>
+          <div class="typo-sample" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif; font-size: 14px; font-weight: 500;">The quick brown fox jumps</div>
+        </div>
+      </div>
+      
+      <div class="ds-section">
+        <h3>Color Palette</h3>
+        <div class="color-grid">
+          <div class="color-item">
+            <div class="color-swatch" style="background: #00C853;"></div>
+            <div class="color-info">
+              <h4>Primary Green</h4>
+              <p>#00C853</p>
+            </div>
+          </div>
+          <div class="color-item">
+            <div class="color-swatch" style="background: #FFFFFF;"></div>
+            <div class="color-info">
+              <h4>Background</h4>
+              <p>#FFFFFF</p>
+            </div>
+          </div>
+          <div class="color-item">
+            <div class="color-swatch" style="background: #F5F5F5;"></div>
+            <div class="color-info">
+              <h4>Surface</h4>
+              <p>#F5F5F5</p>
+            </div>
+          </div>
+          <div class="color-item">
+            <div class="color-swatch" style="background: #1A1A1A;"></div>
+            <div class="color-info">
+              <h4>Text Dark</h4>
+              <p>#1A1A1A</p>
+            </div>
+          </div>
+          <div class="color-item">
+            <div class="color-swatch" style="background: #0288D1;"></div>
+            <div class="color-info">
+              <h4>Accent Blue</h4>
+              <p>#0288D1</p>
+            </div>
+          </div>
+          <div class="color-item">
+            <div class="color-swatch" style="background: #757575;"></div>
+            <div class="color-info">
+              <h4>Text Muted</h4>
+              <p>#757575</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-text">Want to see more work?</p>
+  <a href="./" class="footer-link">
+    Back to Portfolio
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </a>
+</footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-close">Close (ESC)</div>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox').classList.add('active');
+  document.getElementById('lightbox-img').src = src;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
+
+</body>
+</html>
