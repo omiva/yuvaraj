@@ -156,45 +156,31 @@ nav {
   max-width: 700px;
 }
 
-.bento-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 400px 280px 640px 640px;
+.images-grid {
+  display: flex;
+  flex-direction: column;
   gap: 16px;
   margin-top: 48px;
 }
 
-.bento-item {
+.image-item {
   position: relative;
   overflow: hidden;
   background: var(--surface2);
   border: 1px solid var(--border);
   cursor: pointer;
   transition: border-color 0.3s;
+  width: 100%;
 }
 
-.bento-item:hover {
+.image-item:hover {
   border-color: var(--primary);
 }
 
-.bento-item img {
+.image-item img {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
+  height: auto;
   display: block;
-  background: var(--surface2);
-}
-
-.bento-item:nth-child(1) {
-  grid-column: span 2;
-}
-
-.bento-item:nth-child(4) {
-  grid-row: span 2;
-}
-
-.bento-item:nth-child(7) {
-  grid-column: span 2;
 }
 
 .design-system {
@@ -376,16 +362,8 @@ footer {
     padding: 60px 24px;
   }
   
-  .bento-grid {
-    grid-template-columns: 1fr !important;
-    grid-template-rows: auto !important;
+  .images-grid {
     gap: 12px;
-  }
-  
-  .bento-item {
-    aspect-ratio: 16/9 !important;
-    grid-column: span 1 !important;
-    grid-row: span 1 !important;
   }
   
   .design-system {
@@ -422,7 +400,7 @@ footer {
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-back">
+    <a href="./" class="nav-back">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
         <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
@@ -472,32 +450,32 @@ footer {
   <p class="section-label">VISUAL DESIGN</p>
   <h2 class="section-title">Interface Showcase</h2>
   
-  <div class="bento-grid">
-    <div class="bento-item" onclick="openLightbox('hm-profile.png')">
+  <div class="images-grid">
+    <div class="image-item" onclick="openLightbox('hm-profile.png')">
       <img src="hm-profile.png" alt="User Profile">
     </div>
     
-    <div class="bento-item" onclick="openLightbox('hm-widget.png')">
+    <div class="image-item" onclick="openLightbox('hm-widget.png')">
       <img src="hm-widget.png" alt="Widget Interface">
     </div>
     
-    <div class="bento-item" onclick="openLightbox('hm-chat.png')">
+    <div class="image-item" onclick="openLightbox('hm-chat.png')">
       <img src="hm-chat.png" alt="Chat Interface">
     </div>
     
-    <div class="bento-item" onclick="openLightbox('hm-swipe.png')">
+    <div class="image-item" onclick="openLightbox('hm-swipe.png')">
       <img src="hm-swipe.png" alt="Swipe Feature">
     </div>
     
-    <div class="bento-item" onclick="openLightbox('hm-premium.png')">
+    <div class="image-item" onclick="openLightbox('hm-premium.png')">
       <img src="hm-premium.png" alt="Premium Features">
     </div>
     
-    <div class="bento-item" onclick="openLightbox('hm-vbc.png')">
+    <div class="image-item" onclick="openLightbox('hm-vbc.png')">
       <img src="hm-vbc.png" alt="Virtual Business Card">
     </div>
     
-    <div class="bento-item" onclick="openLightbox('hm-hubble-circle.png')">
+    <div class="image-item" onclick="openLightbox('hm-hubble-circle.png')">
       <img src="hm-hubble-circle.png" alt="Hubble Circle">
     </div>
   </div>
@@ -582,7 +560,7 @@ footer {
 
 <footer>
   <p class="footer-text">Want to see more work?</p>
-  <a href="index.html" class="footer-link">
+  <a href="./" class="footer-link">
     Back to Portfolio
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
       <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
