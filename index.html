@@ -544,22 +544,6 @@ section {
   object-fit: cover;
 }
 
-.thumb-crypto {
-  background: linear-gradient(135deg, #1a0a1a 0%, #2d0d2d 50%, #4a0f4a 100%);
-}
-
-.thumb-placeholder-text {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 80px;
-  color: rgba(255,255,255,0.05);
-  letter-spacing: 0.05em;
-  user-select: none;
-}
-
-.project-card.featured .thumb-placeholder-text {
-  font-size: 140px;
-}
-
 .project-thumb-label {
   position: absolute;
   top: 20px;
@@ -1006,10 +990,6 @@ footer {
     margin-left: 16px;
   }
   
-  .thumb-placeholder-text {
-    font-size: 48px !important;
-  }
-  
   .projects-header {
     flex-direction: column;
     align-items: flex-start;
@@ -1218,8 +1198,9 @@ footer {
 
       <a href="algorizz-case-study.html" class="project-card reveal">
         <div class="project-thumb">
-          <div class="project-thumb-bg" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #0a3a3a 100%);"></div>
-          <span class="thumb-placeholder-text" style="font-size:42px">ALGORIZZ<br>PROJECTS</span>
+          <div class="project-thumb-bg">
+            <img src="algorizz-thumbnail.png" alt="Algorizz Projects">
+          </div>
           <span class="project-thumb-label">Design Work</span>
         </div>
         <div class="project-body">
@@ -1236,10 +1217,11 @@ footer {
         </div>
       </a>
 
-      <div class="project-card reveal">
+      <a href="#" class="project-card reveal">
         <div class="project-thumb">
-          <div class="project-thumb-bg thumb-crypto"></div>
-          <span class="thumb-placeholder-text" style="font-size:42px">CRYPTO<br>EXCHANGE</span>
+          <div class="project-thumb-bg">
+            <img src="xufi-thumbnail.png" alt="XuFi Crypto Exchange">
+          </div>
           <span class="project-thumb-label">Campaign Design</span>
         </div>
         <div class="project-body">
@@ -1254,7 +1236,28 @@ footer {
             </svg>
           </div>
         </div>
-      </div>
+      </a>
+
+      <a href="#" class="project-card reveal">
+        <div class="project-thumb">
+          <div class="project-thumb-bg">
+            <img src="chargeup-thumbnail.png" alt="ChargeUp">
+          </div>
+          <span class="project-thumb-label">EV Platform</span>
+        </div>
+        <div class="project-body">
+          <div class="project-info">
+            <p class="project-category">Electric Vehicles · Mobile App · 2025</p>
+            <h3 class="project-name">ChargeUp</h3>
+            <p class="project-desc">Designing a comprehensive EV charging platform that connects drivers with charging stations, manages payments, and tracks charging history — making electric vehicle ownership seamless and accessible.</p>
+          </div>
+          <div class="project-arrow">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+      </a>
 
     </div>
   </div>
