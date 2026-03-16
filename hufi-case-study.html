@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HuFi — Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --surface2: #181818;
+  --border: #222222;
+  --accent: #e8ff47;
+  --text: #f0ede8;
+  --muted: #666666;
+  --muted2: #444444;
+  --primary: #FF1F8E;
+  --secondary: #8B3FFF;
+  --max-width: 1400px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-back:hover {
+  color: var(--accent);
+}
+
+.nav-back svg {
+  transform: rotate(180deg);
+}
+
+.hero {
+  padding: 140px 48px 80px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.hero-category {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(48px, 8vw, 120px);
+  line-height: 0.95;
+  color: var(--text);
+  margin-bottom: 32px;
+}
+
+.hero-intro {
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 800px;
+  margin-bottom: 48px;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.meta-item h4 {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.meta-item p {
+  font-size: 15px;
+  color: var(--text);
+}
+
+.section {
+  padding: 80px 48px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 5vw, 48px);
+  color: var(--text);
+  margin-bottom: 24px;
+  line-height: 1.1;
+}
+
+.section-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 700px;
+  margin-bottom: 48px;
+}
+
+.images-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.image-item {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.image-item:hover {
+  border-color: var(--primary);
+}
+
+.image-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  border: 1px solid var(--border);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  color: var(--text);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 12px 24px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.lightbox-close:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 48px;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--muted2);
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
+}
+
+.footer-link:hover {
+  border-color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .nav-inner {
+    padding: 16px 24px;
+  }
+  
+  .hero {
+    padding: 100px 24px 60px;
+  }
+  
+  .hero-category {
+    font-size: 10px;
+  }
+  
+  .hero-title {
+    font-size: clamp(40px, 12vw, 60px);
+    margin-bottom: 24px;
+  }
+  
+  .hero-intro {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+  
+  .hero-meta {
+    gap: 32px;
+  }
+  
+  .section {
+    padding: 60px 24px;
+  }
+  
+  .images-grid {
+    gap: 12px;
+  }
+  
+  footer {
+    padding: 40px 24px;
+  }
+  
+  .lightbox {
+    padding: 20px;
+  }
+  
+  .lightbox-close {
+    top: 16px;
+    right: 16px;
+    font-size: 12px;
+    padding: 10px 20px;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="./" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Back to Portfolio
+    </a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div style="margin-bottom: 48px;">
+    <img src="xufi-thumbnail.png" alt="HuFi" style="max-width: 200px; height: auto; display: block;">
+  </div>
+  <p class="hero-category">WEB3 · DEFI PLATFORM · 2026</p>
+  <h1 class="hero-title">HuFi</h1>
+  <p class="hero-intro">
+    A decentralized tradeathon organizing platform where communities earn rewards for holding, trading, and contributing to activities that support token growth. Designed to make DeFi campaigns accessible and rewarding for all participants.
+  </p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <h4>Role</h4>
+      <p>Product Designer</p>
+    </div>
+    <div class="meta-item">
+      <h4>Platform</h4>
+      <p>Web & Mobile</p>
+    </div>
+    <div class="meta-item">
+      <h4>Duration</h4>
+      <p>3 months</p>
+    </div>
+    <div class="meta-item">
+      <h4>Year</h4>
+      <p>2026</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <p class="section-label">OVERVIEW</p>
+  <h2 class="section-title">Democratizing DeFi campaigns</h2>
+  <p class="section-text">
+    HuFi is a platform that enables anyone to host or join trading campaigns across multiple blockchain networks. With features like competitive market making, performance tracking, and community rewards, HuFi bridges the gap between traditional finance and decentralized trading ecosystems.
+  </p>
+</section>
+
+<section class="section">
+  <p class="section-label">VISUAL DESIGN</p>
+  <h2 class="section-title">Interface Showcase</h2>
+  
+  <div class="images-grid">
+    <div class="image-item" onclick="openLightbox('hufi-01.png')">
+      <img src="hufi-01.png" alt="Host a Trading Campaign">
+    </div>
+    
+    <div class="image-item" onclick="openLightbox('hufi-02.png')">
+      <img src="hufi-02.png" alt="Multi-Platform Application">
+    </div>
+    
+    <div class="image-item" onclick="openLightbox('hufi-03.png')">
+      <img src="hufi-03.png" alt="Campaign Page">
+    </div>
+    
+    <div class="image-item" onclick="openLightbox('hufi-04.png')">
+      <img src="hufi-04.png" alt="Different Accessibility Features">
+    </div>
+    
+    <div class="image-item" onclick="openLightbox('hufi-05.png')">
+      <img src="hufi-05.png" alt="Home Screen">
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-text">Want to see more work?</p>
+  <a href="./" class="footer-link">
+    Back to Portfolio
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </a>
+</footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-close">Close (ESC)</div>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox').classList.add('active');
+  document.getElementById('lightbox-img').src = src;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
+
+</body>
+</html>
